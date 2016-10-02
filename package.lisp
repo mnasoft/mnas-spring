@@ -1,5 +1,5 @@
 ;;;; package.lisp
 
 (defpackage #:mnas-spring
-  (:use #:cl))
+  (:use #:cl #:ltk #:mnas-logical))
 
