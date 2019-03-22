@@ -8,7 +8,7 @@
   ((l-0 :accessor l-0 :initarg :l-0 :initform 30          :documentation "Длина пружины в свободном состоянии, мм")
    (d-m :accessor d-m :initarg :d-m :initform 10          :documentation "Средний диаметр пружины, мм")
    (d-w :accessor d-w :initarg :d-w :initform 2.5         :documentation "Диаметр проволоки, мм")
-   (n-w :accessor n-w :initarg :n-w :initform 6           :documentation "Количество полных витков, 1")
+   (n-w :accessor n-w :initarg :n-w :initform 6           :documentation "Число рабочих витков пружины, 1")
    (m-w :accessor m-w :initarg :m-w :initform "12Х18Н10Т" :documentation "Материал из которого изготовлена проволока")
    )
   (:documentation "Представляет пружину сжатия"))
