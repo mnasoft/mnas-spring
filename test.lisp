@@ -47,45 +47,6 @@
 		 :m-w    "1 класс")
   "Клапаны изготовления ИРАН")
 
-(defmethod fi-min-li ((spr spring-konstr-l0-f1) X)
-  "Сила, необходимая для придания пружине длины X
-Пример использования:
-;;;; (fi-si *s* 5)
-"
-  (cond
-    ((>= X (L1 spr))
-     (* (/ 
-	 (- (+ (l-0 spr) (l-0-ei spr)) X )
-	 (- (+ (l-0 spr) (l-0-ei spr)) (L1 spr)))
-	(+ (f1 spr) (f1-ei spr))))
-    ((<= X (L1 spr))
-     (* (/ 
-	 (- (+ (l-0 spr) (l-0-es spr) ) X )
-	 (- (+ (l-0 spr) (l-0-es spr) ) (L1 spr)))
-	(+ (f1 spr) (f1-ei spr))))))
-
-(defmethod fi-max-li ((spr spring-konstr-l0-f1) X)
-  "Сила, необходимая для придания пружине длины X
-Пример использования:
-;;;; (fi-si *s* 5)
-"
-  (cond
-    ((<= X (L1 spr))
-     (* (/ 
-	 (- (+ (l-0 spr) (l-0-ei spr) ) X )
-	 (- (+ (l-0 spr) (l-0-ei spr) ) (L1 spr)))
-	(+ (f1 spr) (f1-es spr))))
-    ((>= X (L1 spr))
-     (* (/ 
-	 (- (+ (l-0 spr) (l-0-es spr)) X )
-	 (- (+ (l-0 spr) (l-0-es spr)) (L1 spr)))
-	(+ (f1 spr) (f1-es spr))))))
-
-
-(defmethod fi-li ((spr spring-konstr-l0-f1) X)
-  (* 1/2 (+ (fi-max-li spr X) (fi-min-li spr X)))
-  )
-
 (loop :for i :from 0 :to 14.5 :by 0.5
    :collect (list i (fi-min-li *a* i) (fi-max-li *a* i)))
 

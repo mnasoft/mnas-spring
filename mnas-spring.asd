@@ -15,5 +15,6 @@
 	       (:file "class-spring")
 	       (:file "macro")
 	       (:file "mnas-spring-dialog")
+	       (:file "mnas-spring-dialog-01")	       
       	       (:file "test")
 	       ))
