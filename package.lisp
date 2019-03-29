@@ -3,6 +3,7 @@
 (defpackage #:mnas-spring)
   
 (defpackage #:mnas-spring
+  (:nicknames "MSPR")
   (:use #:cl #:ltk #:mnas-logical)
   (:export mnas-spring::spring-dialog
 	   )
@@ -41,6 +42,3 @@
 	   mnas-spring::si-fi 
 	   )
   )
-  
-
-
