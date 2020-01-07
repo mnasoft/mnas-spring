@@ -1,0 +1,24 @@
+@begin(section)
+@title(Overview)
+
+This is where you explain what your project does.
+
+@end(section)
+
+@begin(section)
+@title(Графы)
+@begin(list)
+ @item(system-graph @image[src=./system-graph.gv.png]())
+ @item(call-graph   @image[src=./call-graph.gv.png]())
+ @item(symbol-graph @image[src=./symbol-graph.gv.png]())
+ @item(class-graph  @image[src=./class-graph.gv.png]())
+@end(list)
+@end(section)
+
+@begin(section)
+@title(Class)
+@cl:with-package[name="mnas-spring"](
+ @cl:doc(class spring)
+ @cl:doc(class spring-konstr-l0-f1)
+ )
+@end(section)
