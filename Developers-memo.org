@@ -1,0 +1,37 @@
+* Операции git [[file:~/org/sbcl/Git-memo.org][Git-memo.org]]
+
+* Генерирование документации при помощи Codex
+
+ http://commondoc.github.io/codex/docs/tutorial.html
+
+ [[file:~/org/sbcl/codex.org][Codex]]
+
+* Пример генерирования документации
+#+name: pwd
+#+BEGIN_SRC shell
+pwd
+#+END_SRC
+
+#+name: basename-pwd
+#+BEGIN_SRC shell
+basename `pwd`
+#+END_SRC
+
+#+BEGIN_SRC lisp :var pwd=pwd :var basename-pwd=basename-pwd
+  ;;;; (require :codex)
+  ;;;; (require :mnas-package)
+  ;;;;
+  ;;;; (require :mnas-spring)
+  (let ((pkg :mnas-spring)
+	(fpath (concatenate 'string pwd "/docs/build/" basename-pwd "/html/")))
+    (codex:document pkg)
+    (mnas-package:package-call-graph   pkg :out-type "png" :viewer nil :fpath fpath :fname "call-graph")
+    (mnas-package:package-system-graph pkg :out-type "png" :viewer nil :fpath fpath :fname "system-graph")
+    (mnas-package:package-class-graph  pkg :out-type "png" :viewer nil :fpath fpath :fname "class-graph")
+    (mnas-package:package-symbol-graph pkg :out-type "png" :viewer nil :fpath fpath :fname "symbol-graph"))
+#+END_SRC
+
+#+RESULTS:
+: #GRAPH(VC=12 RC=3)
+: (T:"spring-dialog" T:"spring-dialog-01" T:"g" T:"*s*" T:"*g-lst*" T:"*l-nom*" T:"*l-nom-ei*" T:"*a*" T:"*f-sphire*" T:"*l-nom-es*" T:"*05303214_v6*" T:"*i*" )
+: ((T:"spring-dialog"->T:"*s*") (T:"spring-dialog-01"->T:"*s*") (T:"g"->T:"*g-lst*") ))
