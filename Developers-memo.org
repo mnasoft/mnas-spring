@@ -1,12 +1,9 @@
-* Операции git [[file:~/org/sbcl/Git-memo.org][Git-memo.org]]
-
-* Генерирование документации при помощи Codex
-
- http://commondoc.github.io/codex/docs/tutorial.html
-
- [[file:~/org/sbcl/codex.org][Codex]]
-
-* Пример генерирования документации
+* Ссылки
+1) Операции git  [[file:~/org/sbcl/Git-memo.org][Git-memo.org]]
+2) [[file:~/org/sbcl/codex.org][Генерирование документации при помощи Codex]]
+3) http://commondoc.github.io/codex/docs/tutorial.html
+4) [[/home/namatv/.slynkrc]]
+* Генерироване документации
 #+name: pwd
 #+BEGIN_SRC shell
 pwd
@@ -17,13 +14,18 @@ pwd
 basename `pwd`
 #+END_SRC
 
+#+name:make-graph
 #+BEGIN_SRC lisp :var pwd=pwd :var basename-pwd=basename-pwd
   ;;;; (require :codex)
   ;;;; (require :mnas-package)
   ;;;;
   ;;;; (require :mnas-spring)
   (let ((pkg :mnas-spring)
-	(fpath (concatenate 'string pwd "/docs/build/" basename-pwd "/html/")))
+	(fpath (concatenate
+		'string
+		(cond ((uiop:getenv "MSYS_HOME")) (t ""))
+		pwd "/docs/build/"
+		basename-pwd "/html/")))
     (codex:document pkg)
     (mnas-package:view-call-graph   pkg :out-type "png" :viewer nil :fpath fpath :fname "call-graph")
     (mnas-package:view-system-graph pkg :out-type "png" :viewer nil :fpath fpath :fname "system-graph")
@@ -31,7 +33,19 @@ basename `pwd`
     (mnas-package:view-symbol-graph pkg :out-type "png" :viewer nil :fpath fpath :fname "symbol-graph"))
 #+END_SRC
 
+#+RESULTS: make-graph
+: #GRAPH(VC=12 RC=3)
+: (T:"g" T:"spring-dialog" T:"spring-dialog-01" T:"*g-lst*" T:"*s*" T:"*f-sphire*" T:"*a*" T:"*05303214_v6*" T:"*l-nom-ei*" T:"*i*" T:"*l-nom*" T:"*l-nom-es*" )
+: ((T:"g"->T:"*g-lst*") (T:"spring-dialog"->T:"*s*") (T:"spring-dialog-01"->T:"*s*") ))
+
 #+RESULTS:
 : #GRAPH(VC=12 RC=3)
 : (T:"spring-dialog" T:"spring-dialog-01" T:"g" T:"*s*" T:"*g-lst*" T:"*l-nom*" T:"*l-nom-ei*" T:"*a*" T:"*f-sphire*" T:"*l-nom-es*" T:"*05303214_v6*" T:"*i*" )
 : ((T:"spring-dialog"->T:"*s*") (T:"spring-dialog-01"->T:"*s*") (T:"g"->T:"*g-lst*") ))
+* Публикация
+#+name: copy-to-n133619
+#+BEGIN_SRC shell :var make-graph=make-graph
+cp -rf ./docs/build/* "\\\\n133619\\home\\_namatv\\public_html\\Site\\Development\\Common-Lisp-Programs\\"
+#+END_SRC
+
+#+RESULTS: copy-to-n133619
