@@ -4,4 +4,11 @@
 *.fasl
 *.lisp-temp
 build
-\#*#
+\#*\#
+
+
+ltximg
+*.bak
+README.html
+README.pdf
+README.tex
