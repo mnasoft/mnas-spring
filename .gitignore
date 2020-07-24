@@ -1,14 +1,18 @@
 .directory
 *~
+*.bak
 *.FASL
 *.fasl
 *.lisp-temp
 build
 \#*\#
 
-
-ltximg
-*.bak
-README.html
 README.pdf
 README.tex
+README.html
+
+Developers-memo.html
+Developers-memo.pdf
+Developers-memo.tex
+
+ltximg
