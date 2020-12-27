@@ -1,12 +1,8 @@
-* Ссылки
-1) Операции git  [[file:~/org/sbcl/Git-memo.org][Git-memo.org]]
-2) [[file:~/org/sbcl/codex.org][Генерирование документации при помощи Codex]]
-3) http://commondoc.github.io/codex/docs/tutorial.html
-4) [[/home/namatv/.slynkrc]]
+* Ссылки [[~/org/sbcl/sbcl-referencies.org][Ссылки]]
 * Генерирование документации
 #+name: make-html
 #+BEGIN_SRC lisp
-  (mnas-package:make-codex-documentation :mnas-spring :mnas-spring)
+  (mnas-package:make-codex-graphs :mnas-spring :mnas-spring)
 #+END_SRC
 * Публикация
 #+name: publish
