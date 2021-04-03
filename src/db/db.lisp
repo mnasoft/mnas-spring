@@ -1,9 +1,12 @@
 ;;;; mnas-spring.lisp
 
-(in-package #:mnas-spring)
+(defpackage #:mnas-spring/db
+  (:use #:cl #:mnas-spring))
+
+(in-package #:mnas-spring/db)
 
 (defparameter *a*
-  (make-instance 'spring-konstr-l0-f1
+  (make-instance '<spring-konstr-l0-f1>
 		 :n-w     14
 		 :d-m     2.6
 		 :d-w     0.2
@@ -18,7 +21,7 @@
   "890030007_V0")
 
 (defparameter *05303214_V6*
-  (make-instance 'spring-konstr-l0-f1
+  (make-instance '<spring-konstr-l0-f1>
 		 :n-w     14
 		 :d-m     2.6
 		 :d-w     0.2
@@ -33,7 +36,7 @@
 
 
 (defparameter *i*
-  (make-instance 'spring-konstr-l0-f1
+  (make-instance '<spring-konstr-l0-f1>
 		 :n-w     14
 		 :d-m     2.6
 		 :d-w     0.2
@@ -57,7 +60,6 @@
   (defparameter *f-sphire*  3.5342917352885173)
   )
 
-
 (/ (fi-min-li *a* (+ *l-nom* *l-nom-es*)) *f-sphire*)
 
 (/ (fi-max-li *a* (+ *l-nom* *l-nom-ei*)) *f-sphire*)
@@ -66,10 +68,6 @@
 
 (/ (fi-max-li *i* (+ *l-nom* *l-nom-ei*)) *f-sphire*)
 
-
 (/ (fi-min-li *05303214_V6* (+ *l-nom* *l-nom-es*)) *f-sphire*)
 
 (/ (fi-max-li *05303214_V6* (+ *l-nom* *l-nom-ei*)) *f-sphire*)
-
-
-
