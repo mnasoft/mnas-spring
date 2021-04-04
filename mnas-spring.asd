@@ -8,6 +8,7 @@
   :serial nil
   :depends-on ("mnas-spring/core"
                "mnas-spring/db"
+               "mnas-spring/gtk"
                ;;"mnas-spring/ltk"
                ))
 
@@ -40,11 +41,10 @@
   :author "Nick Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
-  :depends-on ("mnas-spring/core" "mnas-logical" "ltk" "mnas-spring/ltk-macro")
-  :components ((:module "src/ltk" 
+  :depends-on ("mnas-spring/core" "cl-cffi-gtk" "mnas-string")
+  :components ((:module "src/gtk" 
                 :serial t
-                :components ((:file "mnas-spring-dialog")
-	                     (:file "mnas-spring-dialog-01") 
+                :components ((:file "dialog")
 	                     ))))
 
 (defsystem "mnas-spring/ltk"
