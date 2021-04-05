@@ -121,6 +121,27 @@
   `(make-instance 'gtk-image
                   :file (namestring (asdf:system-relative-pathname :mnas-spring ,path-string))))
 
+(defparameter *license-text*
+  "Распространяется по лицензии GNU GPL версии 3 или более высокой.")
+
+;;;;(make-instance 'gtk-message-dialog :text *info*)
+
+(defun create-about-dialog ()
+  (let ((dialog (make-instance 'gtk-about-dialog
+                               :program-name "MNAS-SPRING-Dialog"
+                               :version      "0.00"
+                               :copyright "(c) Nick Matvyeyev"
+                               :website   "github.com/mnasoft/mnas-spring"
+                               :website-label "Project web site"
+                               :license *license-text* 
+                               :authors '("Nick Matvyeyev, mnasoft@gmail.com")
+                               :documenters '("Nick Matvyeyev, mnasoft@gmail.com")
+                               :artists '("Nick Matvyeyev, mnasoft@gmail.com")
+                               :logo-icon-name "applications-development"
+                               :wrap-license t)))
+    (gtk-dialog-run dialog)
+    (gtk-widget-destroy dialog)))
+
 (defun spring-dialog ()
   (within-main-loop
     (let ((spr (make-instance '<spring-dlg>)))
@@ -183,7 +204,6 @@
             (btn-draw    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-dxf-out.bmp") :label "Draw"))
 
             (btn-help    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-help.bmp") :label "Help"))
-            (btn-info    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-info.bmp") :label "Info"))
             )
         (labels ((update-spring ()
                    (setf (gtk-entry-text e-d-w) (str <spring>-d-w spr))
@@ -302,8 +322,9 @@
             (gtk-box-pack-start row-51 btn-print)
             (gtk-box-pack-start row-51 btn-draw)
             (gtk-box-pack-start row-51 btn-help)
-            (gtk-box-pack-start row-51 btn-info)
-            )
+            (let ((btn-info (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-info.bmp") :label "About")))
+              (gtk-box-pack-start row-51 btn-info)
+              (g-signal-connect btn-info "clicked" (lambda (widget) (declare (ignore widget)) (create-about-dialog)))))
 
           (gtk-container-add frame-01 col-01)
           (gtk-container-add frame-02 col-02)
