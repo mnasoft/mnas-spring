@@ -28,9 +28,6 @@
 
 (defparameter *s-dlg* (make-instance '<spring-dlg>))
 
-(<spring>-fi-li *s-dlg* (<spring-dlg>-l-3 *s-dlg*))
-
-(setf (<spring-dlg>-s-2 *s-dlg*) 10.0)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmethod <spring-dlg>-s-1 ((spring-dlg <spring-dlg>))
@@ -46,7 +43,7 @@
 
 (defmethod (setf <spring-dlg>-s-1) (s1 (spring-dlg <spring-dlg>))
   (setf (<spring-dlg>-l-1 spring-dlg) (- (<spring>-l-0 spring-dlg) s1))
-  spring-dlg)
+   spring-dlg)
 
 (defmethod (setf <spring-dlg>-s-2) (s2 (spring-dlg <spring-dlg>))
   (setf (<spring-dlg>-l-2 spring-dlg) (- (<spring>-l-0 spring-dlg) s2))
@@ -120,7 +117,11 @@
                                     (mnas-string/parse:parse-number (gtk-entry-text ,entry)))
                               (update-spring))))
 
-(defun example-alignment-01 ()
+(defmacro file-img (path-string)
+  `(make-instance 'gtk-image
+                  :file (namestring (asdf:system-relative-pathname :mnas-spring ,path-string))))
+
+(defun spring-dialog ()
   (within-main-loop
     (let ((spr (make-instance '<spring-dlg>)))
       (let ((window   (make-instance 'gtk-window :type :toplevel :title "Расчет пружины" :border-width 12
@@ -174,9 +175,15 @@
             (e-l-w         (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             (e-mass-s      (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             (e-Sk-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
+            ;;
             (row-51     (make-instance 'gtk-box      :orientation :horizontal :spacing 3))
-            (btn-ok     (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-ok") :label "Ok"))
-            (btn-cancel (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-cancel") :label "Cancel"))
+            (btn-ok      (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-ok") :label "Ok"))
+            (btn-cancel  (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-cancel") :label "Cancel"))
+            (btn-print   (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-print.bmp") :label "Print"))
+            (btn-draw    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-dxf-out.bmp") :label "Draw"))
+
+            (btn-help    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-help.bmp") :label "Help"))
+            (btn-info    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-info.bmp") :label "Info"))
             )
         (labels ((update-spring ()
                    (setf (gtk-entry-text e-d-w) (str <spring>-d-w spr))
@@ -290,8 +297,13 @@
               (add-entry row-42 "Sk, мм" e-Sk-b)
               (gtk-box-pack-start col-04 row-42)))
           (block row-51
-            (gtk-box-pack-end row-51 btn-ok)
-            (gtk-box-pack-end row-51 btn-cancel))
+            (gtk-box-pack-start row-51 btn-ok)
+            (gtk-box-pack-start row-51 btn-cancel)
+            (gtk-box-pack-start row-51 btn-print)
+            (gtk-box-pack-start row-51 btn-draw)
+            (gtk-box-pack-start row-51 btn-help)
+            (gtk-box-pack-start row-51 btn-info)
+            )
 
           (gtk-container-add frame-01 col-01)
           (gtk-container-add frame-02 col-02)
@@ -309,4 +321,4 @@
 
 ;;;; #-sbcl (mnas-spring/gtk::example-alignment)
 
-;;;; #+sbcl (sb-int:with-float-traps-masked (:divide-by-zero :invalid) (mnas-spring/gtk::example-alignment-01))
+;;;; #+sbcl (sb-int:with-float-traps-masked (:divide-by-zero :invalid) (mnas-spring/gtk::spring-dialog))
