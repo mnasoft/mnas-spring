@@ -6,7 +6,7 @@
 (in-package #:mnas-spring/db)
 
 (defparameter *a*
-  (make-instance '<spring-konstr-l0-f1>
+  (make-instance '<spring-l0-l1>
 		 :n-w     14
 		 :d-m     2.6
 		 :d-w     0.2
@@ -21,7 +21,7 @@
   "890030007_V0")
 
 (defparameter *05303214_V6*
-  (make-instance '<spring-konstr-l0-f1>
+  (make-instance '<spring-l0-l1>
 		 :n-w     14
 		 :d-m     2.6
 		 :d-w     0.2
@@ -36,7 +36,7 @@
 
 
 (defparameter *i*
-  (make-instance '<spring-konstr-l0-f1>
+  (make-instance '<spring-l0-l1>
 		 :n-w     14
 		 :d-m     2.6
 		 :d-w     0.2
