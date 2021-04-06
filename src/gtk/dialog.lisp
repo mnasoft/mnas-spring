@@ -128,10 +128,10 @@
 
 (defun create-about-dialog ()
   (let ((dialog (make-instance 'gtk-about-dialog
-                               :program-name "MNAS-SPRING-Dialog"
-                               :version      "0.00"
-                               :copyright "(c) Nick Matvyeyev"
-                               :website   "github.com/mnasoft/mnas-spring"
+                               :program-name  "MNAS-SPRING-Dialog"
+                               :version       "0.00"
+                               :copyright     "(c) Nick Matvyeyev"
+                               :website       "github.com/mnasoft/mnas-spring"
                                :website-label "Project web site"
                                :license *license-text* 
                                :authors '("Nick Matvyeyev, mnasoft@gmail.com")
@@ -195,7 +195,11 @@
             (row-42       (make-instance 'gtk-box    :orientation :horizontal :spacing 3))
             (e-l-w         (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             (e-mass-s      (make-instance 'gtk-entry :max-length 10 :width-chars 10))
-            (e-Sk-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
+            (e-Sk-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10
+                                          :primary-icon-name "help" 
+                                          ;;:primary-icon-pixbuf (make-instance 'gtk-image :icon-name "gtk-ok")
+                                          :primary-icon-tooltip-text "COOOOOL"))
+                           ;;(file-img "img/gtk-help.bmp")
             ;;
             (row-51     (make-instance 'gtk-box      :orientation :horizontal :spacing 3))
             (btn-ok      (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-ok") :label "Ok"))
