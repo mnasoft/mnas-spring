@@ -41,7 +41,7 @@
   :author "Nick Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
-  :depends-on ("mnas-spring/core" "cl-cffi-gtk" "mnas-string")
+  :depends-on ("mnas-spring/core" "cl-cffi-gtk" "mnas-string" "mnas-format")
   :components ((:module "src/gtk" 
                 :serial t
                 :components ((:file "dialog")

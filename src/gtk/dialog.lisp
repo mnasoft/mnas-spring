@@ -4,7 +4,7 @@
   (:use :gtk :gdk :gdk-pixbuf :gobject
         :glib :gio :pango :cairo :cffi :common-lisp
         :mnas-spring)
-  (:export #:example-alignment-01
+  (:export #:spring-dialog
            ))
 
 (in-package :mnas-spring/gtk)
@@ -29,6 +29,19 @@
 (defparameter *s-dlg* (make-instance '<spring-dlg>))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod (setf <spring-dlg>-copy) ((ref <spring-dlg>) (spr <spring-dlg>))
+  (setf (<spring>-l-0 spr) (<spring>-l-0 ref))
+  (setf (<spring>-d-m spr) (<spring>-d-m ref))
+  (setf (<spring>-d-w spr) (<spring>-d-w ref))
+  (setf (<spring>-n-w spr) (<spring>-n-w ref))
+  (setf (<spring>-m-w spr) (<spring>-m-w ref))
+  (setf (<spring-dlg>-l-1 spr) (<spring-dlg>-l-1 ref))
+  (setf (<spring-dlg>-l-2 spr) (<spring-dlg>-l-2 ref))
+  (setf (<spring-dlg>-l-3 spr) (<spring-dlg>-l-3 ref))
+  spr)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmethod <spring-dlg>-s-1 ((spring-dlg <spring-dlg>))
   (<spring>-si-li spring-dlg (<spring-dlg>-l-1 spring-dlg)))
@@ -100,10 +113,28 @@
 (defmethod (setf <spring-dlg>-τ-3) (τ3 (spring-dlg <spring-dlg>))
   (setf (<spring-dlg>-f-3 spring-dlg) (<spring>-fi-taui spring-dlg τ3)))
 
+
+(defmethod <spring-dlg>-h ((spring-dlg <spring-dlg>))
+  "Рабочий ход пружины"
+  (- (<spring-dlg>-l-1 spring-dlg) (<spring-dlg>-l-2 spring-dlg)))
+
+(defmethod <spring-dlg>-c ((spring-dlg <spring-dlg>))
+  "Жесткость пружины"
+  (let ((h (<spring-dlg>-h spring-dlg)))
+    (if (<= (abs h) 0.05)
+        0.0
+        (/ (- (<spring-dlg>-f-2 spring-dlg)
+              (<spring-dlg>-f-1 spring-dlg))
+           h))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmacro str (method obj)
-  `(format nil "~A" (,method ,obj)))
+;;  `(format nil "~A" (,method ,obj))  
+  `(mnas-format:round-val (,method ,obj)))
+
+(require :mnas-format)
+
 
 (defmacro add-entry (row lbl entry)
   `(progn (gtk-box-pack-start ,row (gtk-label-new ,lbl))
@@ -120,6 +151,10 @@
 (defmacro file-img (path-string)
   `(make-instance 'gtk-image
                   :file (namestring (asdf:system-relative-pathname :mnas-spring ,path-string))))
+
+(defmacro entry-file-tip (entry file tip)
+  `(setf (gtk-entry-primary-icon-pixbuf ,entry) (gtk-image-pixbuf (file-img ,file))
+         (gtk-entry-primary-icon-tooltip-text ,entry) ,tip))
 
 (defparameter *license-text*
   "Распространяется по лицензии GNU GPL версии 3 или более высокой.")
@@ -144,7 +179,7 @@
 
 (defun spring-dialog ()
   (within-main-loop
-    (let ((spr (make-instance '<spring-dlg>)))
+    (let ((spr (setf (<spring-dlg>-copy (make-instance '<spring-dlg>)) *s-dlg*)))
       (let ((window   (make-instance 'gtk-window :type :toplevel :title "Расчет пружины" :border-width 12
                                                  :width-request 100 :height-request 10
                                                  :icon-name "gtk-execute"
@@ -166,7 +201,7 @@
             (frame-02  (make-instance 'gtk-frame     :label "Характеристики материала"))
             (col-02     (make-instance 'gtk-box      :orientation :vertical :spacing 3))
             (row-21      (make-instance 'gtk-box     :orientation :horizontal :spacing 3))
-            (e-g[mpa]     (make-instance 'gtk-entry  :text (str <spring>-g[mpa] spr) :max-length 10 :width-chars 10))
+            (e-g[mpa]     (make-instance 'gtk-entry  :max-length 10 :width-chars 10))
             (e-τ-s        (make-instance 'gtk-entry  :text "Hello" :max-length 10 :width-chars 10))
             (frame-03   (make-instance 'gtk-frame    :label "Характеристики пружины"))
             (col-03      (make-instance 'gtk-box     :orientation :vertical :spacing 3))
@@ -185,6 +220,9 @@
             (e-S3-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             (e-F3-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             (e-τ3-s        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
+            (row-34       (make-instance 'gtk-box    :orientation :horizontal :spacing 3))
+            (e-h-s        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
+            (e-C-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             (frame-04   (make-instance 'gtk-frame    :label "Некоторые коэффициенты"))
             (col-04      (make-instance 'gtk-box     :orientation :vertical :spacing 3))
             (row-41       (make-instance 'gtk-box    :orientation :horizontal :spacing 3))
@@ -195,13 +233,9 @@
             (row-42       (make-instance 'gtk-box    :orientation :horizontal :spacing 3))
             (e-l-w         (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             (e-mass-s      (make-instance 'gtk-entry :max-length 10 :width-chars 10))
-            (e-Sk-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10
-                                          :primary-icon-name "help" 
-                                          ;;:primary-icon-pixbuf (make-instance 'gtk-image :icon-name "gtk-ok")
-                                          :primary-icon-tooltip-text "COOOOOL"))
-                           ;;(file-img "img/gtk-help.bmp")
+            (e-Sk-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             ;;
-            (row-51     (make-instance 'gtk-box      :orientation :horizontal :spacing 3))
+            (row-61     (make-instance 'gtk-box      :orientation :horizontal :spacing 3))
             (btn-ok      (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-ok") :label "Ok"))
             (btn-cancel  (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-cancel") :label "Cancel"))
             (btn-print   (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-print.bmp") :label "Print"))
@@ -240,10 +274,50 @@
                    (setf (gtk-entry-text e-S3-b) (str <spring-dlg>-s-3 spr))
                    (setf (gtk-entry-text e-F3-b) (str <spring-dlg>-f-3 spr))
                    (setf (gtk-entry-text e-τ3-s) (str <spring-dlg>-τ-3 spr))
+                   (setf (gtk-entry-text e-h-s)  (str <spring-dlg>-h   spr))
+                   (setf (gtk-entry-text e-C-b)  (str <spring-dlg>-C   spr))
+                   )
+                 (init-entry ()
+                   (entry-file-tip e-d-w    "img/gtk-help.bmp" "Диаметр проволоки")
+                   (entry-file-tip e-d-o    "img/gtk-help.bmp" "Наружный диаметр пружины")
+                   (entry-file-tip e-d-m    "img/gtk-help.bmp" "Средний диаметр пружины")
+                   (entry-file-tip e-n-w    "img/gtk-help.bmp" "Количество рабочих витков пружины")
+                   (entry-file-tip e-n-f    "img/gtk-help.bmp" "Общее количество витков пружины")
+                   (entry-file-tip e-t-s    "img/gtk-help.bmp" "Шаг витков пружины")
+                   (entry-file-tip e-l-0    "img/gtk-help.bmp" "Высота пружины в свободном состоянии")
+                   (entry-file-tip e-l-4    "img/gtk-help.bmp" "Высота пружины при соприкосновении витков")
+                   (entry-file-tip e-g[mpa] "img/gtk-help.bmp" "Модуль Юнга второго рода")
+                   (entry-file-tip e-k-1    "img/gtk-help.bmp" "Коэффициент прочности пружины")
+                   (entry-file-tip e-k-2    "img/gtk-help.bmp" "Коэффициент жесткости пружины")
+                   (entry-file-tip e-i-s    "img/gtk-help.bmp" "Индекс пружины")
+                   (entry-file-tip e-i-1    "img/gtk-help.bmp" "Относительная высота пружины")
+                   (entry-file-tip e-l-w    "img/gtk-help.bmp" "Длина проволоки развернутой пружины")
+                   (entry-file-tip e-mass-s "img/gtk-help.bmp" "Массу пружины")
+                   (entry-file-tip e-L1-b   "img/gtk-help.bmp" "Высота пружины под нагрузкой F1")
+                   (entry-file-tip e-S1-b   "img/gtk-help.bmp" "Деформация пружины от нагрузки F1")
+                   (entry-file-tip e-F1-b   "img/gtk-help.bmp" "Нагрузка F1")
+                   (entry-file-tip e-τ1-s   "img/gtk-help.bmp" "Касательные напряжения от нагрузки F1")
+                   (entry-file-tip e-L2-b   "img/gtk-help.bmp" "Высота пружины под нагрузкой F2")
+                   (entry-file-tip e-S2-b   "img/gtk-help.bmp" "Деформация пружины от нагрузки F2")
+                   (entry-file-tip e-F2-b   "img/gtk-help.bmp" "Нагрузка F2")
+                   (entry-file-tip e-τ2-s   "img/gtk-help.bmp" "Касательные напряжения от нагрузки F2")
+                   (entry-file-tip e-L3-b   "img/gtk-help.bmp" "Высота пружины под нагрузкой F3")
+                   (entry-file-tip e-S3-b   "img/gtk-help.bmp" "Деформация пружины от нагрузки F3")
+                   (entry-file-tip e-F3-b   "img/gtk-help.bmp" "Нагрузка F3")
+                   (entry-file-tip e-τ3-s   "img/gtk-help.bmp" "Касательные напряжения от нагрузки F3")
                    ;;
-                   (setf (gtk-entry-text e-Sk-b) "0")))
+                   (entry-file-tip e-Sk-b "img/gtk-help.bmp" "Толщина конца последнего витка пружины")
+                   (entry-file-tip e-h-s "img/gtk-help.bmp" "Рабочий ход пружины")
+                   (entry-file-tip e-C-b "img/gtk-help.bmp" "Жёсткость пружины")
+                   ))
           (update-spring)
+          (init-entry)
           (g-signal-connect window "destroy" (lambda (widget) (declare (ignore widget)) (leave-gtk-main)))
+          (g-signal-connect btn-ok "clicked" (lambda (widget) (declare (ignore widget))
+                                               (setf *s-dlg* spr)
+                                               (gtk-widget-destroy window)))
+          (g-signal-connect btn-cancel "clicked" (lambda (widget) (declare (ignore widget))
+                                                   (gtk-widget-destroy window)))
           ;;
           (gsc-activate e-d-w <spring>-d-w spr)
           (gsc-activate e-d-o <spring>-d-o spr)
@@ -307,7 +381,11 @@
               (add-entry row-33 "S3, мм"  e-S3-b)
               (add-entry row-33 "F3, Н"   e-F3-b)
               (add-entry row-33 "τ3, МПа" e-τ3-s)
-              (gtk-box-pack-start col-03 row-33)))
+              (gtk-box-pack-start col-03 row-33))
+            (block row-34
+              (add-entry row-34 "h, мм"   e-h-s)
+              (add-entry row-34 "C, H/мм" e-C-b)
+              (gtk-box-pack-start col-03 row-34)))
           (block col-04
             (block row-41
               (add-entry row-41 "K1, 1" e-k-1)
@@ -320,14 +398,14 @@
               (add-entry row-42 "m, кг" e-mass-s)
               (add-entry row-42 "Sk, мм" e-Sk-b)
               (gtk-box-pack-start col-04 row-42)))
-          (block row-51
-            (gtk-box-pack-start row-51 btn-ok)
-            (gtk-box-pack-start row-51 btn-cancel)
-            (gtk-box-pack-start row-51 btn-print)
-            (gtk-box-pack-start row-51 btn-draw)
-            (gtk-box-pack-start row-51 btn-help)
+          (block row-61
+            (gtk-box-pack-start row-61 btn-ok)
+            (gtk-box-pack-start row-61 btn-cancel)
+            (gtk-box-pack-start row-61 btn-print)
+            (gtk-box-pack-start row-61 btn-draw)
+            (gtk-box-pack-start row-61 btn-help)
             (let ((btn-info (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-info.bmp") :label "About")))
-              (gtk-box-pack-start row-51 btn-info)
+              (gtk-box-pack-start row-61 btn-info)
               (g-signal-connect btn-info "clicked" (lambda (widget) (declare (ignore widget)) (create-about-dialog)))))
 
           (gtk-container-add frame-01 col-01)
@@ -339,7 +417,7 @@
           (gtk-container-add v-box-01 frame-02)
           (gtk-container-add v-box-01 frame-03)
           (gtk-container-add v-box-01 frame-04)
-          (gtk-container-add v-box-01 row-51)
+          (gtk-container-add v-box-01 row-61)
 
           (gtk-container-add window v-box-01)
           (gtk-widget-show-all window))))))
@@ -347,3 +425,5 @@
 ;;;; #-sbcl (mnas-spring/gtk::example-alignment)
 
 ;;;; #+sbcl (sb-int:with-float-traps-masked (:divide-by-zero :invalid) (mnas-spring/gtk::spring-dialog))
+
+;;;;*s-dlg*
