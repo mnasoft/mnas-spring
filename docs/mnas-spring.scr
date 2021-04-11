@@ -41,6 +41,7 @@
 @begin(section)
  @title(Классы)
  @cl:with-package[name="MNAS-SPRING"](
+  @cl:doc(class <spring>)
   @cl:doc(class <spring-l0-l1>))
 @end(section)
 @end(section)

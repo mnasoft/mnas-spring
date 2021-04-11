@@ -4,7 +4,7 @@
   (:use :gtk :gdk :gdk-pixbuf :gobject
         :glib :gio :pango :cairo :cffi :common-lisp
         :mnas-spring)
-  (:export #:spring-dialog
+  (:export spring-culc
            ))
 
 (in-package :mnas-spring/gtk)
@@ -295,7 +295,7 @@
             ;;
             (row-61     (make-instance 'gtk-box      :orientation :horizontal :spacing 3))
             (btn-draw    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-dxf-out.bmp") :label "Draw"))
-            (btn-help    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-help.bmp") :label "Help"))
+            
             )
         (labels ((update-spring ()
                    (setf (gtk-entry-text e-d-w) (str <spring>-d-w spr))
@@ -492,8 +492,14 @@
                                                        "Результаты расчета пружины"))))
             
             (gtk-box-pack-start row-61 btn-draw)
-            (gtk-box-pack-start row-61 btn-help)
-            
+            (let ((btn-help (make-instance 'gtk-button :image-position :left
+                                                       :always-show-image t
+                                                       :image (file-img "img/gtk-help.bmp") :label "Help")))
+              (gtk-box-pack-start row-61 btn-help)
+              (g-signal-connect btn-help "clicked" (lambda (widget) (declare (ignore widget))
+                                                     (create-about-dialog-01
+                                                      "https://mnasoft.ddns.mksat.net/Common-Lisp-Programs/mnas-spring/обзор.html"
+                                                      "Документация к проекту Mnas-Spring"))))
             (let ((btn-info (make-instance 'gtk-button :image-position :left
                                                        :always-show-image t
                                                        :image (file-img "img/gtk-info.bmp") :label "About")))
@@ -514,8 +520,17 @@
           (gtk-container-add window v-box-01)
           (gtk-widget-show-all window))))))
 
-;;;; #-sbcl (mnas-spring/gtk::example-alignment)
+(defun spring-culc ()
+    "@b(Описание:) функция @b(spring-culc) запускает на выполнение
+     диалоговое окно, предназначенное для расчета пружины."
+  #-sbcl
+  (spring-dialog)
 
-;;;; #+sbcl (sb-int:with-float-traps-masked (:divide-by-zero :invalid) (mnas-spring/gtk::spring-dialog))
+  #+sbcl
+  (sb-int:with-float-traps-masked
+      (:divide-by-zero :invalid)
+    (spring-dialog)))
+
+;;;; (spring-culc)
 
 ;;;;*s-dlg*
