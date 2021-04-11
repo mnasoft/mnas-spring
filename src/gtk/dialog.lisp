@@ -438,25 +438,15 @@
 
 ;;;;*s-dlg*
 
-(require :cl-who)
-
 (setf (cl-who:html-mode) :html5)
 
 (defparameter *tbl*
-  '(("Длина пружины в свободном состоянии" "l-0" "мм" <spring>-l-0)
-    ("Средний диаметр пружины"             "d-m" "мм" <spring>-d-m)
-    ("Диаметр проволоки"                   "d-w" "мм" <spring>-d-w)
-    ("Толщина проволоки" "d-w" "мм" <spring>-d-w)
+  '(("Длина пружины в свободном состоянии"        "l-0" "мм" <spring>-l-0)
+    ("Средний диаметр пружины"                    "d-m" "мм" <spring>-d-m)
+    ("Диаметр проволоки"                          "d-w" "мм" <spring>-d-w)
+    ("Материал из которого изготовлена проволока" "m-w" "  " <spring>-m-w)
 
     ))
-
-(documentation #'<spring>-i-1 'defgeneric )
-
-
-
-(d-w :accessor <spring>-d-w :initarg :d-w :initform 2.5         :documentation ", мм")
-(n-w :accessor <spring>-n-w :initarg :n-w :initform 6           :documentation "Число рабочих витков пружины, 1")
-(m-w :accessor <spring>-m-w :initarg :m-w :initform "12Х18Н10Т" :documentation "Материал из которого изготовлена проволока")
 
 (with-open-file (os "~/Spring.html" :direction :output :if-exists :supersede)
   (cl-who:with-html-output (str os :prologue t :indent t)
