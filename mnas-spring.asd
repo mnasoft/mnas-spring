@@ -4,7 +4,7 @@
   :description "Система mnas-spring предназачена для выполнения
                 расчета пружин сжатия."
   :author "Nick Matvyeyev <mnasoft@gmail.com>"
-  :version "0.6.9"
+  :version "0.8.12"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
   :depends-on ("mnas-spring/core"
@@ -72,3 +72,10 @@
                 :serial t
                 :components ((:file "macro")
 	                     ))))
+
+(defsystem "mnas-spring/docs"
+  :description "Система mnas-spring/doc предназачена для подготовки документации."
+  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
+  :serial nil
+  :depends-on ("mnas-package" "codex"))

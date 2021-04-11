@@ -49,66 +49,35 @@
 #+END_SRC
 
 #+RESULTS: publish
-| sending                         | incremental | file | list       |         |   |        |      |            |         |          |               |
-| ./                              |             |      |            |         |   |        |      |            |         |          |               |
-| call-graph-mnas-spring.gv       |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 108         | 100% | 0.00kB/s   | 0:00:00 |   | 108    | 100% | 0.00kB/s   | 0:00:00 | (xfr#1,  | to-chk=14/16) |
-| call-graph-mnas-spring.gv.png   |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 15.48K      | 100% | 14.76MB/s  | 0:00:00 |   | 15.48K | 100% | 14.76MB/s  | 0:00:00 | (xfr#2,  | to-chk=13/16) |
-| class-graph-mnas-spring.gv      |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 140         | 100% | 136.72kB/s | 0:00:00 |   | 140    | 100% | 136.72kB/s | 0:00:00 | (xfr#3,  | to-chk=12/16) |
-| class-graph-mnas-spring.gv.png  |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 8.54K       | 100% | 8.14MB/s   | 0:00:00 |   | 8.54K  | 100% | 8.14MB/s   | 0:00:00 | (xfr#4,  | to-chk=11/16) |
-| mnas-spring.html                |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 9.76K       | 100% | 9.31MB/s   | 0:00:00 |   | 9.76K  | 100% | 9.31MB/s   | 0:00:00 | (xfr#5,  | to-chk=10/16) |
-| symbol-graph-mnas-spring.gv     |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 246         | 100% | 240.23kB/s | 0:00:00 |   | 246    | 100% | 240.23kB/s | 0:00:00 | (xfr#6,  | to-chk=9/16)  |
-| symbol-graph-mnas-spring.gv.png |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 32.77K      |  68% | 31.25MB/s  | 0:00:00 |   | 47.79K | 100% | 3.04MB/s   | 0:00:00 | (xfr#7,  | to-chk=8/16)  |
-| system-graph-mnas-spring.gv     |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 134         | 100% | 8.72kB/s   | 0:00:00 |   | 134    | 100% | 8.72kB/s   | 0:00:00 | (xfr#8,  | to-chk=7/16)  |
-| system-graph-mnas-spring.gv.png |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 15.78K      | 100% | 1.00MB/s   | 0:00:00 |   | 15.78K | 100% | 1.00MB/s   | 0:00:00 | (xfr#9,  | to-chk=6/16)  |
-| графы-mnas-spring.html          |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 2.36K       | 100% | 153.45kB/s | 0:00:00 |   | 2.36K  | 100% | 153.45kB/s | 0:00:00 | (xfr#10, | to-chk=5/16)  |
-| обзор.html                      |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 2.00K       | 100% | 130.08kB/s | 0:00:00 |   | 2.00K  | 100% | 130.08kB/s | 0:00:00 | (xfr#11, | to-chk=4/16)  |
-| static/                         |             |      |            |         |   |        |      |            |         |          |               |
-| static/highlight.css            |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 1.57K       | 100% | 14.08kB/s  | 0:00:00 |   | 1.57K  | 100% | 14.08kB/s  | 0:00:00 | (xfr#12, | to-chk=2/16)  |
-| static/highlight.js             |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 22.99K      | 100% | 205.97kB/s | 0:00:00 |   | 22.99K | 100% | 205.97kB/s | 0:00:00 | (xfr#13, | to-chk=1/16)  |
-| static/style.css                |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 4.32K       | 100% | 38.72kB/s  | 0:00:00 |   | 4.32K  | 100% | 38.72kB/s  | 0:00:00 | (xfr#14, | to-chk=0/16)  |
-| N118383                         |             |      |            |         |   |        |      |            |         |          |               |
-| sending                         | incremental | file | list       |         |   |        |      |            |         |          |               |
-| ./                              |             |      |            |         |   |        |      |            |         |          |               |
-| call-graph-mnas-spring.gv       |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 108         | 100% | 0.00kB/s   | 0:00:00 |   | 108    | 100% | 0.00kB/s   | 0:00:00 | (xfr#1,  | to-chk=14/16) |
-| call-graph-mnas-spring.gv.png   |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 15.48K      | 100% | 14.76MB/s  | 0:00:00 |   | 15.48K | 100% | 14.76MB/s  | 0:00:00 | (xfr#2,  | to-chk=13/16) |
-| class-graph-mnas-spring.gv      |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 140         | 100% | 136.72kB/s | 0:00:00 |   | 140    | 100% | 136.72kB/s | 0:00:00 | (xfr#3,  | to-chk=12/16) |
-| class-graph-mnas-spring.gv.png  |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 8.54K       | 100% | 8.14MB/s   | 0:00:00 |   | 8.54K  | 100% | 8.14MB/s   | 0:00:00 | (xfr#4,  | to-chk=11/16) |
-| mnas-spring.html                |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 9.76K       | 100% | 635.68kB/s | 0:00:00 |   | 9.76K  | 100% | 635.68kB/s | 0:00:00 | (xfr#5,  | to-chk=10/16) |
-| symbol-graph-mnas-spring.gv     |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 246         | 100% | 16.02kB/s  | 0:00:00 |   | 246    | 100% | 16.02kB/s  | 0:00:00 | (xfr#6,  | to-chk=9/16)  |
-| symbol-graph-mnas-spring.gv.png |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 32.77K      |  68% | 2.08MB/s   | 0:00:00 |   | 47.79K | 100% | 3.04MB/s   | 0:00:00 | (xfr#7,  | to-chk=8/16)  |
-| system-graph-mnas-spring.gv     |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 134         | 100% | 8.72kB/s   | 0:00:00 |   | 134    | 100% | 8.72kB/s   | 0:00:00 | (xfr#8,  | to-chk=7/16)  |
-| system-graph-mnas-spring.gv.png |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 15.78K      | 100% | 1.00MB/s   | 0:00:00 |   | 15.78K | 100% | 1.00MB/s   | 0:00:00 | (xfr#9,  | to-chk=6/16)  |
-| графы-mnas-spring.html          |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 2.36K       | 100% | 153.45kB/s | 0:00:00 |   | 2.36K  | 100% | 153.45kB/s | 0:00:00 | (xfr#10, | to-chk=5/16)  |
-| обзор.html                      |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 2.00K       | 100% | 130.08kB/s | 0:00:00 |   | 2.00K  | 100% | 130.08kB/s | 0:00:00 | (xfr#11, | to-chk=4/16)  |
-| static/                         |             |      |            |         |   |        |      |            |         |          |               |
-| static/highlight.css            |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 1.57K       | 100% | 24.74kB/s  | 0:00:00 |   | 1.57K  | 100% | 24.74kB/s  | 0:00:00 | (xfr#12, | to-chk=2/16)  |
-| static/highlight.js             |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 22.99K      | 100% | 362.10kB/s | 0:00:00 |   | 22.99K | 100% | 362.10kB/s | 0:00:00 | (xfr#13, | to-chk=1/16)  |
-| static/style.css                |             |      |            |         |   |        |      |            |         |          |               |
-|                                 | 4.32K       | 100% | 68.08kB/s  | 0:00:00 |   | 4.32K  | 100% | 68.08kB/s  | 0:00:00 | (xfr#14, | to-chk=0/16)  |
+| sending                         | incremental |                                                      file | list       |         |    |         |      |            |         |          |               |
+| created                         | directory   | /home/namatv/public_html/Common-Lisp-Programs/mnas-spring |            |         |    |         |      |            |         |          |               |
+| ./                              |             |                                                           |            |         |    |         |      |            |         |          |               |
+| call-graph-mnas-spring.gv       |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 91          |                                                      100% | 0.00kB/s   | 0:00:00 |  | 91      | 100% | 0.00kB/s   | 0:00:00 | (xfr#1,  | to-chk=14/16) |
+| call-graph-mnas-spring.gv.png   |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 7.19K       |                                                      100% | 6.86MB/s   | 0:00:00 |  | 7.19K   | 100% | 6.86MB/s   | 0:00:00 | (xfr#2,  | to-chk=13/16) |
+| class-graph-mnas-spring.gv      |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 186         |                                                      100% | 181.64kB/s | 0:00:00 |  | 186     | 100% | 181.64kB/s | 0:00:00 | (xfr#3,  | to-chk=12/16) |
+| class-graph-mnas-spring.gv.png  |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 22.01K      |                                                      100% | 10.49MB/s  | 0:00:00 |  | 22.01K  | 100% | 10.49MB/s  | 0:00:00 | (xfr#4,  | to-chk=11/16) |
+| mnas-spring.html                |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 28.96K      |                                                      100% | 13.81MB/s  | 0:00:00 |  | 28.96K  | 100% | 13.81MB/s  | 0:00:00 | (xfr#5,  | to-chk=10/16) |
+| symbol-graph-mnas-spring.gv     |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 89          |                                                      100% | 28.97kB/s  | 0:00:00 |  | 89      | 100% | 28.97kB/s  | 0:00:00 | (xfr#6,  | to-chk=9/16)  |
+| symbol-graph-mnas-spring.gv.png |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 10.01K      |                                                      100% | 3.18MB/s   | 0:00:00 |  | 10.01K  | 100% | 3.18MB/s   | 0:00:00 | (xfr#7,  | to-chk=8/16)  |
+| system-graph-mnas-spring.gv     |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 2.67K       |                                                      100% | 651.37kB/s | 0:00:00 |  | 2.67K   | 100% | 651.37kB/s | 0:00:00 | (xfr#8,  | to-chk=7/16)  |
+| system-graph-mnas-spring.gv.png |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 32.77K      |                                                        4% | 6.25MB/s   | 0:00:00 |  | 757.82K | 100% | 45.17MB/s  | 0:00:00 | (xfr#9,  | to-chk=6/16)  |
+| графы-mnas-spring.html          |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 2.29K       |                                                      100% | 131.43kB/s | 0:00:00 |  | 2.29K   | 100% | 131.43kB/s | 0:00:00 | (xfr#10, | to-chk=5/16)  |
+| обзор.html                      |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 2.04K       |                                                      100% | 117.24kB/s | 0:00:00 |  | 2.04K   | 100% | 117.24kB/s | 0:00:00 | (xfr#11, | to-chk=4/16)  |
+| static/                         |             |                                                           |            |         |    |         |      |            |         |          |               |
+| static/highlight.css            |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 1.57K       |                                                      100% | 85.23kB/s  | 0:00:00 |  | 1.57K   | 100% | 85.23kB/s  | 0:00:00 | (xfr#12, | to-chk=2/16)  |
+| static/highlight.js             |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 22.99K      |                                                      100% | 1.22MB/s   | 0:00:00 |  | 22.99K  | 100% | 1.22MB/s   | 0:00:00 | (xfr#13, | to-chk=1/16)  |
+| static/style.css                |             |                                                           |            |         |    |         |      |            |         |          |               |
+|                               | 4.32K       |                                                      100% | 221.94kB/s | 0:00:00 |  | 4.32K   | 100% | 221.94kB/s | 0:00:00 | (xfr#14, | to-chk=0/16)  |
