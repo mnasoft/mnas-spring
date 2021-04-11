@@ -164,26 +164,83 @@
 (defun create-about-dialog ()
   (let ((dialog (make-instance 'gtk-about-dialog
                                :program-name  "MNAS-SPRING-Dialog"
-                               :version       "0.00"
-                               :copyright     "(c) Nick Matvyeyev"
-                               :website       "github.com/mnasoft/mnas-spring"
+                               :version       (mnas-package/sys:version :mnas-spring)
+                               :copyright     "(ɔ) Nick Matvyeyev, mnasoft@gmail.com"
+                               :website       "https://github.com/mnasoft/mnas-spring"
                                :website-label "Project web site"
-                               :license *license-text* 
-                               :authors '("Nick Matvyeyev, mnasoft@gmail.com")
-                               :documenters '("Nick Matvyeyev, mnasoft@gmail.com")
-                               :artists '("Nick Matvyeyev, mnasoft@gmail.com")
-                               :logo-icon-name "applications-development"
+                               :license       *license-text* 
+                               ;;:authors       '("Nick Matvyeyev, mnasoft@gmail.com")
+                               ;;:documenters '("Nick Matvyeyev, mnasoft@gmail.com")
+                               ;;:artists     '("Nick Matvyeyev, mnasoft@gmail.com")
+                               :logo          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
+                               :icon          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
+                               ;; :logo-icon-name "applications-development"
                                :wrap-license t)))
     (gtk-dialog-run dialog)
     (gtk-widget-destroy dialog)))
+
+(defun create-about-dialog-01 (website website-label)
+  (let ((dialog (make-instance 'gtk-about-dialog
+                               :program-name  "MNAS-SPRING-Dialog"
+                               :website       website
+                               :website-label website-label
+                               :logo          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
+                               :icon          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
+                               )))
+    (gtk-dialog-run dialog)
+    (gtk-widget-destroy dialog)))
+
+
+(defun create-message-dialog (text secondary-text)
+  (let ((dialog (make-instance 'gtk-message-dialog
+                               :message-type :info
+                               :buttons :ok
+                               :text text
+                               :modal t
+                               :secondary-text (format nil secondary-text))))
+    (gtk-dialog-run dialog)
+    (gtk-widget-destroy dialog)))
+
+
+(defparameter *tbl*
+  '((<spring>-d-w     "d"   "мм"   "Диаметр проволоки")
+    (<spring>-d-o     "D1"  "мм"   "Диаметр пружины наружный")
+    (<spring>-d-m     "D"   "мм"   "Диаметр пружины средний")
+    (<spring>-l-0     "L0"  "мм"   "Высота пружины в свободном состоянии")
+    (<spring-dlg>-l-1 "L1"  "мм"   "Высота пружины при предварительной деформации")
+    (<spring-dlg>-l-2 "L2"  "мм"   "Высота пружины при рабочей деформации")
+    (<spring-dlg>-l-3 "L3"  "мм"   "Высота пружины при максимальной деформации")
+    (<spring>-l-4     "L4"  "мм"   "Высота пружины при соприкосновении витков")
+    (<spring-dlg>-s-1 "S1"  "мм"   "Предварительная деформация пружины")
+    (<spring-dlg>-s-2 "S2"  "мм"   "Рабочая деформация пружины" )
+    (<spring-dlg>-s-3 "S3"  "мм"   "Максимальная деформация пружины" )
+    (<spring>-t-s     "t"   "мм"   "Шаг пружины в свободном состоянии" )
+    (<spring>-s-k     "Sk"  "мм"   "Толщина конца опорного витка пружины")
+    (<spring-dlg>-h   "h"   "мм"   "Рабочий ход пружины")
+    (<spring>-l-w     "L"   "мм"   "Длина проволоки развернутой пружины")
+    (<spring>-n-w     "n"   "1"    "Число витков пружины")
+    (<spring>-n-f     "n1"  "1"    "Полное число витков пружины")
+    (<spring>-i-s     "i"   "1"    "Индекс пружины")
+    (<spring>-k-1     "K1"  "1"    "Коэффициент, учитывающий влияние кривизны витка")
+    (<spring>-k-2     "K2"  "1"    "Коэффициент, учитывающий влияние поперечной силы")
+    (<spring-dlg>-f-1 "F1"  "Н"    "Сила пружины при предварительной деформации")
+    (<spring-dlg>-f-2 "F2"  "Н"    "Сила пружины при рабочей деформации")
+    (<spring-dlg>-f-3 "F3"  "Н"    "Сила пружины при максимальной деформации")
+    (<spring-dlg>-τ-1 "τ1"  "МПа"  "Напряжение при кручении при предварительной деформации")
+    (<spring-dlg>-τ-2 "τ2"  "МПа"  "Напряжение при кручении при рабочей деформации")
+    (<spring-dlg>-τ-3 "τ3"  "МПа"  "Напряжение при кручении при максимальной деформации")
+    ;; (<spring-dlg>-[τ] "[τ]" "МПа"  "Допускаемое напряжение при кручении")
+    (<spring-dlg>-c   "C"   "Н/мм" "Жесткость пружины")
+    (<spring>-g[mpa]  "G"   "МПа"  "Модуль сдвига")
+    (<spring>-i-1     "i1"  "1"    "Отношение длины пружины в свободном состоянии к её среднему диаметру")
+    (<spring>-mass-s  "m"   "кг"   "Масса пружины")))
 
 (defun spring-dialog ()
   (within-main-loop
     (let ((spr (setf (<spring-dlg>-copy (make-instance '<spring-dlg>)) *s-dlg*)))
       (let ((window   (make-instance 'gtk-window :type :toplevel :title "Расчет пружины" :border-width 12
                                                  :width-request 100 :height-request 10
-                                                 ;; :icon-name "gtk-execute"
-                                                 :icon (gtk-image-pixbuf (file-img "img/2021-04-09_14-03-00.png"))
+                                                 :icon (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
                                                  ))
             (v-box-01 (make-instance 'gtk-box        :orientation :vertical :spacing 3))
             (frame-01  (make-instance 'gtk-frame     :label "Геометрия пружинны"))
@@ -237,7 +294,6 @@
             (e-Sk-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             ;;
             (row-61     (make-instance 'gtk-box      :orientation :horizontal :spacing 3))
-            (btn-print   (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-print.bmp") :label "Print"))
             (btn-draw    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-dxf-out.bmp") :label "Draw"))
             (btn-help    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-help.bmp") :label "Help"))
             )
@@ -257,6 +313,7 @@
                    (setf (gtk-entry-text e-i-1) (str <spring>-i-1 spr))
                    (setf (gtk-entry-text e-l-w) (str <spring>-l-w spr))
                    (setf (gtk-entry-text e-mass-s) (str <spring>-mass-s spr))
+                   (setf (gtk-entry-text e-Sk-b) (str <spring>-s-k spr))
                    ;;
                    (setf (gtk-entry-text e-L1-b) (str <spring-dlg>-l-1 spr))
                    (setf (gtk-entry-text e-S1-b) (str <spring-dlg>-s-1 spr))
@@ -391,7 +448,7 @@
               (gtk-box-pack-start col-04 row-41))
             (block row-42
               (add-entry row-42 "Lw, мм" e-l-w)
-              (add-entry row-42 "m, кг" e-mass-s)
+              (add-entry row-42 "m, кг"  e-mass-s)
               (add-entry row-42 "Sk, мм" e-Sk-b)
               (gtk-box-pack-start col-04 row-42)))
           (block row-61
@@ -408,7 +465,28 @@
               (gtk-box-pack-start row-61 btn-cancel)
               (g-signal-connect btn-cancel "clicked" (lambda (widget) (declare (ignore widget))
                                                        (gtk-widget-destroy window))))
-            (gtk-box-pack-start row-61 btn-print)
+            (let ((btn-print   (make-instance 'gtk-button :image-position
+                                              :left :always-show-image t :image (file-img "img/gtk-print.bmp") :label "Print")))
+              (gtk-box-pack-start row-61 btn-print)
+              (g-signal-connect btn-print "clicked" (lambda (widget) (declare (ignore widget))
+                                                      (setf (cl-who:html-mode) :html5)
+                                                      (let ((f-name "~/Spring.html"))
+                                                        (with-open-file (os f-name :direction :output :if-exists :supersede)
+                                                          (cl-who:with-html-output (str os :prologue t :indent t)
+                                                            (:table :border 2 :cellpadding 5 :cellspacing 5
+                                                                    (:tr (:th "Наименование") (:th "Об.") (:th "Разм.") (:th "Знач."))
+                                                                    (loop :for (func des dim naim) :in *tbl*
+                                                                          do (cl-who:htm
+                                                                              (:tr (:td (cl-who:str naim))
+                                                                                   (:td (cl-who:str des))
+                                                                                   (:td (cl-who:str dim))
+                                                                                   (:td (cl-who:str (mnas-format:round-val
+                                                                                                     (funcall func spr))))))))))
+                                                        f-name)
+                                                      (create-about-dialog-01
+                                                       (concatenate 'string "file:///" (namestring (truename "~/Spring.html")))
+                                                       "Результаты расчета пружины"))))
+            
             (gtk-box-pack-start row-61 btn-draw)
             (gtk-box-pack-start row-61 btn-help)
             
@@ -437,25 +515,3 @@
 ;;;; #+sbcl (sb-int:with-float-traps-masked (:divide-by-zero :invalid) (mnas-spring/gtk::spring-dialog))
 
 ;;;;*s-dlg*
-
-(setf (cl-who:html-mode) :html5)
-
-(defparameter *tbl*
-  '(("Длина пружины в свободном состоянии"        "l-0" "мм" <spring>-l-0)
-    ("Средний диаметр пружины"                    "d-m" "мм" <spring>-d-m)
-    ("Диаметр проволоки"                          "d-w" "мм" <spring>-d-w)
-    ("Материал из которого изготовлена проволока" "m-w" "  " <spring>-m-w)
-
-    ))
-
-(with-open-file (os "~/Spring.html" :direction :output :if-exists :supersede)
-  (cl-who:with-html-output (str os :prologue t :indent t)
-    (:table :border 0 :cellpadding 5 :cellspacing 5
-            (:tr (:th "Наименование") (:th "Об.") (:th "Разм.") (:th "Знач."))
-            (loop :for (naim des dim func) :in *tbl*
-                  do (cl-who:htm
-                      (:tr (:td (cl-who:str naim))
-                           (:td (cl-who:str des))
-                           (:td (cl-who:str dim))
-                           (:td (cl-who:str (funcall func *s-dlg*))))))
-            )))

@@ -42,6 +42,7 @@
 	   <spring>-fi-taui
 	   <spring>-si-fi
            <spring>-li-fi
+           <spring>-s-k
            )
   (:export fi-li
            fi-max-li
@@ -577,7 +578,22 @@
 "
   (let ((i (if (< i-1 0.0) 1.0 i-1)))
   (setf (<spring>-l-0 spr) (* i (<spring>-d-m spr)))
-  spr))
+    spr))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod <spring>-s-k ((spr <spring>))
+  "@b(Описание:) метод @b(<spring>-s-k) возвращает толщину концевого
+   витка пружины.
+
+ @b(Пример использования:)
+@begin[lang=lisp](code)
+ (<spring>-s-k *s*)= >0.625 (62.5%)
+@end(code)
+"
+  (if (< (<spring>-d-w spr) 1.0)
+      (<spring>-d-w spr)
+      (/ (<spring>-d-w spr) 4.0)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; spring-examples
