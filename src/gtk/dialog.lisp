@@ -172,7 +172,7 @@
                                ;;:authors       '("Nick Matvyeyev, mnasoft@gmail.com")
                                ;;:documenters '("Nick Matvyeyev, mnasoft@gmail.com")
                                ;;:artists     '("Nick Matvyeyev, mnasoft@gmail.com")
-                               :logo          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
+                               :logo          (gtk-image-pixbuf (file-img "img/mnas-logo.png"))
                                :icon          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
                                ;; :logo-icon-name "applications-development"
                                :wrap-license t)))
@@ -184,7 +184,7 @@
                                :program-name  "MNAS-SPRING-Dialog"
                                :website       website
                                :website-label website-label
-                               :logo          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
+                               :logo          (gtk-image-pixbuf (file-img "img/mnas-logo.png"))
                                :icon          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
                                )))
     (gtk-dialog-run dialog)
@@ -473,15 +473,19 @@
                                                       (let ((f-name "~/Spring.html"))
                                                         (with-open-file (os f-name :direction :output :if-exists :supersede)
                                                           (cl-who:with-html-output (str os :prologue t :indent t)
-                                                            (:table :border 2 :cellpadding 5 :cellspacing 5
-                                                                    (:tr (:th "Наименование") (:th "Об.") (:th "Разм.") (:th "Знач."))
-                                                                    (loop :for (func des dim naim) :in *tbl*
-                                                                          do (cl-who:htm
-                                                                              (:tr (:td (cl-who:str naim))
-                                                                                   (:td (cl-who:str des))
-                                                                                   (:td (cl-who:str dim))
-                                                                                   (:td (cl-who:str (mnas-format:round-val
-                                                                                                     (funcall func spr))))))))))
+                                                            (:html
+                                                             (:head (:meta :charset "UTF-8")
+                                                                    (:title "Результаты расчета пружины"))
+                                                             (:body
+                                                              (:table :border 2 :cellpadding 5 :cellspacing 5
+                                                                      (:tr (:th "Наименование") (:th "Об.") (:th "Разм.") (:th "Знач."))
+                                                                      (loop :for (func des dim naim) :in *tbl*
+                                                                            do (cl-who:htm
+                                                                                (:tr (:td (cl-who:str naim))
+                                                                                     (:td (cl-who:str des))
+                                                                                     (:td (cl-who:str dim))
+                                                                                     (:td (cl-who:str (mnas-format:round-val
+                                                                                                       (funcall func spr))))))))))))
                                                         f-name)
                                                       (create-about-dialog-01
                                                        (concatenate 'string "file:///" (namestring (truename "~/Spring.html")))
