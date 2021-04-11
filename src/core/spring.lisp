@@ -179,10 +179,23 @@
 
  @b(Пример использования:)
 @begin[lang=lisp](code)
- (<spring>-i-s *s*) => 4.0
+ (setf (<spring>-i-s *s*) 6.0) => #<spring>(l-0=30 d-m=15.0 d-w=2.5 n-w=6 m-w=\"12Х18Н10Т\")
 @end(code)
 "
   (/ (<spring>-d-m spr) (<spring>-d-w spr)))
+
+(defmethod (setf <spring>-i-s) (i-s (spr <spring>))
+  "@b(Описание:) метод @b(<spring>-i-s) устанавливает средний диаметр
+   витов для пружины такой, чтобы индекс пружины был равен i-s.
+
+ @b(Пример использования:)
+@begin[lang=lisp](code)
+ (<spring>-i-s *s*) => 4.0
+@end(code)
+"
+  (let ((i (if (< i-s 2.0) 2.0 i-s)))
+    (setf (<spring>-d-m spr) (* (<spring>-d-w spr) i))
+    spr))
 
 (defmethod <spring>-k-1 ((spr <spring>))
   "@b(Описание:) метод @b(<spring>-k-1) возвращвет коэффициент прочности пружины.
@@ -551,6 +564,21 @@
 @end(code)
 "
   (/ (<spring>-l-0 spr) (<spring>-d-m spr)))
+
+(defmethod (setf <spring>-i-1) (i-1 (spr <spring>))
+  "@b(Описание:) метод @b(<spring>-i-1) устанавливает такую высоту
+   пружины в свободном состоянии, что относительная высота становится равной
+   i-1.
+
+ @b(Пример использования:)
+@begin[lang=lisp](code)
+ (setf (<spring>-i-1 *s*) 1.0) => #<spring>(l-0=15.0 d-m=15.0 d-w=2.5 n-w=6 m-w=\"12Х18Н10Т\")
+@end(code)
+"
+  (let ((i (if (< i-1 0.0) 1.0 i-1)))
+  (setf (<spring>-l-0 spr) (* i (<spring>-d-m spr)))
+  spr))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; spring-examples
 

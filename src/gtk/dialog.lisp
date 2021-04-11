@@ -182,7 +182,8 @@
     (let ((spr (setf (<spring-dlg>-copy (make-instance '<spring-dlg>)) *s-dlg*)))
       (let ((window   (make-instance 'gtk-window :type :toplevel :title "Расчет пружины" :border-width 12
                                                  :width-request 100 :height-request 10
-                                                 :icon-name "gtk-execute"
+                                                 ;; :icon-name "gtk-execute"
+                                                 :icon (gtk-image-pixbuf (file-img "img/2021-04-09_14-03-00.png"))
                                                  ))
             (v-box-01 (make-instance 'gtk-box        :orientation :vertical :spacing 3))
             (frame-01  (make-instance 'gtk-frame     :label "Геометрия пружинны"))
@@ -236,11 +237,8 @@
             (e-Sk-b        (make-instance 'gtk-entry :max-length 10 :width-chars 10))
             ;;
             (row-61     (make-instance 'gtk-box      :orientation :horizontal :spacing 3))
-            (btn-ok      (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-ok") :label "Ok"))
-            (btn-cancel  (make-instance 'gtk-button :image-position :left :always-show-image t :image (make-instance 'gtk-image :icon-name "gtk-cancel") :label "Cancel"))
             (btn-print   (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-print.bmp") :label "Print"))
             (btn-draw    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-dxf-out.bmp") :label "Draw"))
-
             (btn-help    (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-help.bmp") :label "Help"))
             )
         (labels ((update-spring ()
@@ -313,11 +311,6 @@
           (update-spring)
           (init-entry)
           (g-signal-connect window "destroy" (lambda (widget) (declare (ignore widget)) (leave-gtk-main)))
-          (g-signal-connect btn-ok "clicked" (lambda (widget) (declare (ignore widget))
-                                               (setf *s-dlg* spr)
-                                               (gtk-widget-destroy window)))
-          (g-signal-connect btn-cancel "clicked" (lambda (widget) (declare (ignore widget))
-                                                   (gtk-widget-destroy window)))
           ;;
           (gsc-activate e-d-w <spring>-d-w spr)
           (gsc-activate e-d-o <spring>-d-o spr)
@@ -342,6 +335,9 @@
           (gsc-activate e-τ1-s <spring-dlg>-τ-1 spr)
           (gsc-activate e-τ2-s <spring-dlg>-τ-2 spr)
           (gsc-activate e-τ3-s <spring-dlg>-τ-3 spr)
+          ;;
+          (gsc-activate e-i-s <spring>-i-s spr)
+          (gsc-activate e-i-1 <spring>-i-1 spr)
 
           (block col-01
             (block row-11
@@ -399,12 +395,26 @@
               (add-entry row-42 "Sk, мм" e-Sk-b)
               (gtk-box-pack-start col-04 row-42)))
           (block row-61
-            (gtk-box-pack-start row-61 btn-ok)
-            (gtk-box-pack-start row-61 btn-cancel)
+            (let ((btn-ok (make-instance 'gtk-button :image-position :left
+                                                     :always-show-image t
+                                                     :image (make-instance 'gtk-image :icon-name "gtk-ok") :label "Ok")))
+              (gtk-box-pack-start row-61 btn-ok)
+              (g-signal-connect btn-ok "clicked" (lambda (widget) (declare (ignore widget))
+                                                   (setf *s-dlg* spr)
+                                                   (gtk-widget-destroy window))))
+            (let ((btn-cancel  (make-instance 'gtk-button :image-position :left
+                                                          :always-show-image t
+                                                          :image (make-instance 'gtk-image :icon-name "gtk-cancel") :label "Cancel")))
+              (gtk-box-pack-start row-61 btn-cancel)
+              (g-signal-connect btn-cancel "clicked" (lambda (widget) (declare (ignore widget))
+                                                       (gtk-widget-destroy window))))
             (gtk-box-pack-start row-61 btn-print)
             (gtk-box-pack-start row-61 btn-draw)
             (gtk-box-pack-start row-61 btn-help)
-            (let ((btn-info (make-instance 'gtk-button :image-position :left :always-show-image t :image (file-img "img/gtk-info.bmp") :label "About")))
+            
+            (let ((btn-info (make-instance 'gtk-button :image-position :left
+                                                       :always-show-image t
+                                                       :image (file-img "img/gtk-info.bmp") :label "About")))
               (gtk-box-pack-start row-61 btn-info)
               (g-signal-connect btn-info "clicked" (lambda (widget) (declare (ignore widget)) (create-about-dialog)))))
 
@@ -427,3 +437,35 @@
 ;;;; #+sbcl (sb-int:with-float-traps-masked (:divide-by-zero :invalid) (mnas-spring/gtk::spring-dialog))
 
 ;;;;*s-dlg*
+
+(require :cl-who)
+
+(setf (cl-who:html-mode) :html5)
+
+(defparameter *tbl*
+  '(("Длина пружины в свободном состоянии" "l-0" "мм" <spring>-l-0)
+    ("Средний диаметр пружины"             "d-m" "мм" <spring>-d-m)
+    ("Диаметр проволоки"                   "d-w" "мм" <spring>-d-w)
+    ("Толщина проволоки" "d-w" "мм" <spring>-d-w)
+
+    ))
+
+(documentation #'<spring>-i-1 'defgeneric )
+
+
+
+(d-w :accessor <spring>-d-w :initarg :d-w :initform 2.5         :documentation ", мм")
+(n-w :accessor <spring>-n-w :initarg :n-w :initform 6           :documentation "Число рабочих витков пружины, 1")
+(m-w :accessor <spring>-m-w :initarg :m-w :initform "12Х18Н10Т" :documentation "Материал из которого изготовлена проволока")
+
+(with-open-file (os "~/Spring.html" :direction :output :if-exists :supersede)
+  (cl-who:with-html-output (str os :prologue t :indent t)
+    (:table :border 0 :cellpadding 5 :cellspacing 5
+            (:tr (:th "Наименование") (:th "Об.") (:th "Разм.") (:th "Знач."))
+            (loop :for (naim des dim func) :in *tbl*
+                  do (cl-who:htm
+                      (:tr (:td (cl-who:str naim))
+                           (:td (cl-who:str des))
+                           (:td (cl-who:str dim))
+                           (:td (cl-who:str (funcall func *s-dlg*))))))
+            )))
