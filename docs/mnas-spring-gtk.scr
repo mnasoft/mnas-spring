@@ -1,0 +1,12 @@
+@begin(section) @title(Обзор)
+
+Система mnas-spring/ltk реализует диалоговое окно,
+                преддназначенное для расчета пружины сжатия.@end(section)
+@begin(section) @title(MNAS-SPRING/GTK)
+
+@begin(section)
+ @title(Функции)
+ @cl:with-package[name="MNAS-SPRING/GTK"](
+  @cl:doc(function spring-culc))
+@end(section)
+@end(section)
