@@ -135,7 +135,6 @@
 
 (require :mnas-format)
 
-
 (defmacro add-entry (row lbl entry)
   `(progn (gtk-box-pack-start ,row (gtk-label-new ,lbl))
           (gtk-box-pack-start ,row ,entry)))
