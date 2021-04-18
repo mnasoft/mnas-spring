@@ -54,7 +54,7 @@
 (in-package :mnas-spring)
 
 (defparameter *G-lst*
-   '(("1 класс"         78500e6  50 20 0.0)
+   '(("1 класс 70"      78500e6  50 20 0.0)
      ("60С2А"           78500e6 250 20 0.1)
      ("65Г"             78500e6  50 20 0.0)
      ("51ХФА"           81400e6 250 20 0.1)
@@ -127,6 +127,40 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; classes
 
+(defclass <material> ()
+  ((name    :accessor <material>-name    :initarg :m-w     :initform "12Х18Н10Т"
+            :documentation "Наименование материала, из которого изготовлена проволока.")
+   (t-range :accessor <material>-t-range :initarg :t-range :initform '(-40.0 120.0)
+            :documentation "Диапазон температур применения, C.")
+   ([τ]     :accessor <material>-[τ]     :initarg :[τ]     :initform 650.0
+            :documentation "Допускаемые напряжения при кручении, Па.")
+   (G       :accessor <material>-G       :initarg :G       :initform 68600.0e6
+            :documentation "Модуль сдвига, Па.")
+   (ΔG      :accessor <material>-ΔG      :initarg :ΔG      :initform 0.0
+            :documentation "Коэффициента уменьшения модуля сдвига при увеличении температуры от нормальной до максимальной."))
+  (:documentation
+   "@b(Описание:) класс @b(<material>) представляет материал для
+    винтовых пружин сжатия из проволоки круглого сечения.
+
+ @b(Пример использования:)
+@begin[lang=lisp](code)
+ (make-instance '<material>)
+ => #<material>(name=\"12Х18Н10Т\" t-range=(-40 120) [τ]=650.0 G=6.86e10 ΔG=0.0)
+@end(code)
+"))
+
+(defmethod print-object :before ((x <material>) s) (format s "#<material>" ))
+
+(defmethod print-object         ((x <material>) s)
+  (format s "(name=~S t-range=~S [τ]=~S G=~S ΔG=~S)"
+          (<material>-name    x)
+          (<material>-t-range x)
+          (<material>-[τ]     x)
+          (<material>-G       x)
+          (<material>-ΔG      x)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
 (defclass <spring> ()
   ((l-0 :accessor <spring>-l-0 :initarg :l-0 :initform 30          :documentation "Длина пружины в свободном состоянии, мм")
    (d-m :accessor <spring>-d-m :initarg :d-m :initform 10          :documentation "Средний диаметр пружины, мм")
