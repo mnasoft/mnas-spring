@@ -1,14 +1,11 @@
-(:docstring-markup-format :scriba
- :systems (:mnas-spring)
- :documents ((:title "Mnas-Spring"
-              :authors ("Nick Matvyeyev")
-              :output-format (:type :multi-html
-                              :template :minima)
-              :sources ("mnas-spring.scr"
-                        "mnas-spring-graph.scr"
-                        "mnas-spring-db.scr"
-                        "mnas-spring-db-graph.scr"
-                        "mnas-spring-gtk.scr"
-                        "mnas-spring-gtk-graph.scr"
-                        ))))
-
+(:docstring-markup-format
+   :scriba
+   :systems (:MNAS-SPRING :MNAS-SPRING/DOCS)
+   :documents ((:title "Mnas-Spring"
+	        :authors ("Nick Matvyeyev")
+	        :output-format (:TYPE :MULTI-HTML :TEMPLATE :GAMMA) 
+                :sources ("mnas-spring.scr" "mnas-spring-gtk.scr"
+                          "mnas-spring-db.scr" "mnas-spring-graph.scr"
+                          "mnas-spring-db-graph.scr"
+                          "mnas-spring-gtk-graph.scr")
+                )))

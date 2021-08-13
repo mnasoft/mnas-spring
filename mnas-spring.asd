@@ -78,4 +78,7 @@
   :author "Nick Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
-  :depends-on ("mnas-package" "codex"))
+  :depends-on ("mnas-spring" "codex" "mnas-package")
+  :components ((:module "src/docs"
+		:serial nil
+                :components ((:file "docs")))))
