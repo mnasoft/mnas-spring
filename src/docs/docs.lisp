@@ -1,3 +1,5 @@
+;;;; ./src/docs/docs.lisp
+
 (defpackage #:mnas-spring/docs
   (:use #:cl ) 
   (:nicknames "MSPR/DOCS")
@@ -11,8 +13,9 @@
   (loop
     :for i :in
     '((:mnas-spring     :mnas-spring)
-      (:mnas-spring/db  :mnas-spring/db)
       (:mnas-spring/gtk :mnas-spring/gtk)
+      #+nil
+      (:mnas-spring/db  :mnas-spring/db)
       )
     :do (apply #'mnas-package:document i)))
 
@@ -20,9 +23,9 @@
   (loop
     :for i :in
     '(:mnas-spring
-      :mnas-spring/db
       :mnas-spring/gtk
-      )
+      #+nil
+      :mnas-spring/db)
     :do (mnas-package:make-codex-graphs i i)))
 
 (defun make-all (&aux

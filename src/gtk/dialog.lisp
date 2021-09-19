@@ -4,7 +4,7 @@
   (:use :gtk :gdk :gdk-pixbuf :gobject
         :glib :gio :pango :cairo :cffi :common-lisp
         :mnas-spring)
-  (:export spring-culc
+  (:export dialog
            ))
 
 (in-package :mnas-spring/gtk)
@@ -519,8 +519,8 @@
           (gtk-container-add window v-box-01)
           (gtk-widget-show-all window))))))
 
-(defun spring-culc ()
-    "@b(Описание:) функция @b(spring-culc) запускает на выполнение
+(defun dialog ()
+    "@b(Описание:) функция @b(dialog) запускает на выполнение
      диалоговое окно, предназначенное для расчета пружины."
   #-sbcl
   (spring-dialog)
@@ -530,6 +530,6 @@
       (:divide-by-zero :invalid)
     (spring-dialog)))
 
-;;;; (spring-culc)
+;;;; (dialog)
 
 ;;;;*s-dlg*
