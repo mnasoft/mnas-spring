@@ -45,7 +45,7 @@
   (mnas-package:make-mainfest-lisp
    '(:mnas-spring :mnas-spring/docs)
    "Mnas-Spring"
-   '("Nick Matvyeyev")
+   '("Mykola Matvyeyev")
    (mnas-package:find-sources "mnas-spring")
    :output-format of)
   (codex:document :mnas-spring)

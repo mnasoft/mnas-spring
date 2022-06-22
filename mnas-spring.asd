@@ -3,7 +3,7 @@
 (defsystem "mnas-spring"
   :description "Система mnas-spring предназачена для выполнения
                 расчета пружин сжатия."
-  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :version "0.10.13"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
@@ -16,7 +16,7 @@
 (defsystem "mnas-spring/core"
   :description "Система mnas-spring предназачена для выполнения
                 расчета пружин сжатия."
-  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
   :depends-on ("mnas-logical")
@@ -27,7 +27,7 @@
 (defsystem "mnas-spring/db"
   :description "Система mnas-spring содержит данные некоторых пружин
   сжатия, применяемых ZM."
-  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
   :depends-on ("mnas-spring/core")
@@ -39,7 +39,7 @@
 (defsystem "mnas-spring/gtk"
   :description "Система mnas-spring/ltk реализует диалоговое окно,
                 преддназначенное для расчета пружины сжатия."
-  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
   :depends-on ("mnas-package/sys" "mnas-spring/core" "cl-cffi-gtk" "mnas-string" "mnas-format" "cl-who")
@@ -51,7 +51,7 @@
 (defsystem "mnas-spring/ltk"
   :description "Система mnas-spring/ltk реализует диалоговое окно,
                 преддназначенное для расчета пружины сжатия."
-  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
   :depends-on ("mnas-spring/core" "mnas-logical" "ltk" "mnas-spring/ltk-macro")
@@ -64,7 +64,7 @@
 (defsystem "mnas-spring/ltk-macro"
   :description "Система mnas-spring/ltk реализует диалоговое окно,
                 преддназначенное для расчета пружины сжатия."
-  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
   :depends-on ("mnas-spring/core" "mnas-logical" "ltk")
@@ -75,7 +75,7 @@
 
 (defsystem "mnas-spring/docs"
   :description "Система mnas-spring/doc предназачена для подготовки документации."
-  :author "Nick Matvyeyev <mnasoft@gmail.com>"
+  :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
   :depends-on ("mnas-spring" "codex" "mnas-package")

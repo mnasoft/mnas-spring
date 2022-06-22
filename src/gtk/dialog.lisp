@@ -164,13 +164,13 @@
   (let ((dialog (make-instance 'gtk-about-dialog
                                :program-name  "MNAS-SPRING-Dialog"
                                :version       (mnas-package/sys:version :mnas-spring)
-                               :copyright     "(ɔ) Nick Matvyeyev, mnasoft@gmail.com"
+                               :copyright     "(ɔ) Mykola Matvyeyev, mnasoft@gmail.com"
                                :website       "https://github.com/mnasoft/mnas-spring"
                                :website-label "Project web site"
                                :license       *license-text* 
-                               ;;:authors       '("Nick Matvyeyev, mnasoft@gmail.com")
-                               ;;:documenters '("Nick Matvyeyev, mnasoft@gmail.com")
-                               ;;:artists     '("Nick Matvyeyev, mnasoft@gmail.com")
+                               ;;:authors       '("Mykola Matvyeyev, mnasoft@gmail.com")
+                               ;;:documenters '("Mykola Matvyeyev, mnasoft@gmail.com")
+                               ;;:artists     '("Mykola Matvyeyev, mnasoft@gmail.com")
                                :logo          (gtk-image-pixbuf (file-img "img/mnas-logo.png"))
                                :icon          (gtk-image-pixbuf (file-img "img/gtk-spring.bmp"))
                                ;; :logo-icon-name "applications-development"
