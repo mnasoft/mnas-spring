@@ -11,22 +11,29 @@
 
 (defun make-document ()
   (loop
+    :for j :from 1
     :for i :in
     '((:mnas-spring     :mnas-spring)
       (:mnas-spring/gtk :mnas-spring/gtk)
       #+nil
       (:mnas-spring/db  :mnas-spring/db)
       )
-    :do (apply #'mnas-package:document i)))
+    :do
+       (progn
+         (apply #'mnas-package:document i)
+         (format t "~A ~A~%" j i))))
 
 (defun make-graphs ()
   (loop
+    :for j :from 1
     :for i :in
     '(:mnas-spring
       :mnas-spring/gtk
       #+nil
       :mnas-spring/db)
-    :do (mnas-package:make-codex-graphs i i)))
+    :do (progn
+          (mnas-package:make-codex-graphs i i)
+          (format t "~A ~A~%" j i))))
 
 (defun make-all (&aux
                    (of (if (find (uiop:hostname)
