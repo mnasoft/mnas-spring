@@ -8,7 +8,6 @@
            bind-entry-txt
            defun-with-ltk-my))
 
-
 (in-package :mnas-spring/ltk-macro)
 
 (defmacro mk-group (entry parent lbl-str entry-txt &body body)
