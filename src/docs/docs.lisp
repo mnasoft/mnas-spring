@@ -1,6 +1,6 @@
 ;;;; ./src/docs/docs.lisp
 
-(defpackage #:mnas-spring/docs
+(defpackage :mnas-spring/docs
   (:use #:cl ) 
   (:nicknames "MSPR/DOCS")
   (:export make-all)

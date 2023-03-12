@@ -1,9 +1,9 @@
 ;;;; mnas-spring.lisp
 
-(defpackage #:mnas-spring/db
+(defpackage :mnas-spring/db
   (:use #:cl #:mnas-spring))
 
-(in-package #:mnas-spring/db)
+(in-package :mnas-spring/db)
 
 (defparameter *a*
   (make-instance '<spring-l0-l1>

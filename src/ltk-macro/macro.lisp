@@ -1,6 +1,6 @@
 ;;;; macro.lisp
 
-(defpackage #:mnas-spring/ltk-macro
+(defpackage :mnas-spring/ltk-macro
   (:use #:cl #:mnas-spring #:ltk) ;;;; #:mnas-logical
   (:export mk-group
            bind-entry-slot
@@ -9,7 +9,7 @@
            defun-with-ltk-my))
 
 
-(in-package #:mnas-spring/ltk-macro)
+(in-package :mnas-spring/ltk-macro)
 
 (defmacro mk-group (entry parent lbl-str entry-txt &body body)
   `((,(read-from-string (format nil "~s~s" entry '-group))

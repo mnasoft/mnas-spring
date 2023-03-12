@@ -1,6 +1,6 @@
 ;;;; ./src/core/spring.lisp
 
-(defpackage #:mnas-spring
+(defpackage :mnas-spring
   (:nicknames "MSPR" "MNAS-SPRING/CORE")
   (:use #:cl #:mnas-logical)
   (:export <spring>

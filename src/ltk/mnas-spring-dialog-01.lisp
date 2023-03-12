@@ -1,6 +1,6 @@
 ;;;; mnas-spring-dialog-01.lisp
 
-(in-package #:mnas-spring/ltk)
+(in-package :mnas-spring/ltk)
 
 
 

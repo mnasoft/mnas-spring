@@ -1,11 +1,11 @@
 ;;;; mnas-spring-dialog.lisp
 
-(defpackage #:mnas-spring/ltk
+(defpackage :mnas-spring/ltk
   (:use #:cl #:mnas-spring  #:mnas-logical #:ltk #:mnas-spring/ltk-macro)
   (:export spring-dialog
            spring-dialog-01))
 
-(in-package #:mnas-spring/ltk)
+(in-package :mnas-spring/ltk)
 
 (defun-with-ltk-my spring-dialog
     ((bar     (make-instance 'frame :pack '(:side :top)))
