@@ -14,8 +14,9 @@
                ))
 
 (defsystem "mnas-spring/core"
-  :description "Система mnas-spring предназачена для выполнения
-                расчета пружин сжатия."
+  :description
+  "Система mnas-spring предназачена для выполнения расчета пружин
+   сжатия."
   :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
@@ -25,8 +26,9 @@
                 :components ((:file "spring")))))
 
 (defsystem "mnas-spring/db"
-  :description "Система mnas-spring содержит данные некоторых пружин
-  сжатия, применяемых ZM."
+  :description
+  "Система mnas-spring содержит характеристики некоторых пружин сжатия,
+   применяемых ZM."
   :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
@@ -37,8 +39,9 @@
                              ))))
 
 (defsystem "mnas-spring/gtk"
-  :description "Система mnas-spring/ltk реализует диалоговое окно,
-                преддназначенное для расчета пружины сжатия."
+  :description
+  "Система mnas-spring/ltk реализует диалоговое окно, предназначенное
+   для расчета пружины сжатия."
   :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
@@ -74,7 +77,8 @@
 	                     ))))
 
 (defsystem "mnas-spring/docs"
-  :description "Система mnas-spring/doc предназачена для подготовки документации."
+  :description
+  "Система mnas-spring/doc предназачена для подготовки документации."
   :author "Mykola Matvyeyev <mnasoft@gmail.com>"
   :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
   :serial nil
