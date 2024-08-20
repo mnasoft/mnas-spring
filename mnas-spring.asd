@@ -4,8 +4,14 @@
   :description "Система mnas-spring предназачена для выполнения
                 расчета пружин сжатия."
   :author "Mykola Matvyeyev <mnasoft@gmail.com>"
-  :version "0.10.13"
-  :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"    
+  :version "0.10.14"
+  :license "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 or later"
+
+  :defsystem-depends-on ("deploy")
+  :build-operation "deploy-op"
+  :build-pathname "mnas-spring"
+  :entry-point "mnas-spring/gtk:dialog"
+  
   :serial nil
   :depends-on ("mnas-spring/core"
                "mnas-spring/db"
