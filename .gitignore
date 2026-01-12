@@ -5,6 +5,7 @@
 *.fasl
 *.lisp-temp
 build
+bin/
 \#*\#
 
 docs/*.scr
